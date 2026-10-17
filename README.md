@@ -109,7 +109,7 @@ After the model is downloaded, an audit makes no network calls except to Ollama 
 | `npm run split:check -- <file>` | Shows which sections the splitter picks, without calling the model. |
 | `npm run typecheck` | Runs `tsc --noEmit`. |
 
-Set the `LEXI_MODEL` environment variable to try a different Ollama model, for example `gemma4:e4b`. Only `gemma4:e2b-it-qat` has been tested.
+Set the `LIM_MODEL` environment variable to try a different Ollama model, for example `gemma4:e4b`. Only `gemma4:e2b-it-qat` has been tested.
 
 ## How it works
 

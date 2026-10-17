@@ -1,7 +1,7 @@
 import type { ClauseKey } from "./splitter";
 
 export const OLLAMA_URL = "http://127.0.0.1:11434";
-export const MODEL = process.env.LEXI_MODEL ?? "gemma4:e2b-it-qat";
+export const MODEL = process.env.LIM_MODEL ?? "gemma4:e2b-it-qat";
 
 export interface PsaSection {
   ref: string;
