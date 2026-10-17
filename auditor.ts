@@ -211,24 +211,38 @@ function parseAudit(raw: string, key: ClauseKey, ref: ReferenceClause, clauseTex
   const issues: string[] = [];
   const notes: string[] = [];
 
+  const sentences = clauseText
+    .split(/(?<=[.;])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const modelEvidence = new Map<number, string>();
+
   for (const c of obj.checks ?? []) {
-    const flagText = ref.red_flags[(c.flag ?? 0) - 1];
-    const guard = GUARDS[key][(c.flag ?? 0) - 1];
+    const n = c.flag ?? 0;
     const evidence = String(c.evidence ?? "").trim();
     const quote = norm(evidence).replace(/^["']+|["']+$/g, "");
-    const guardOk =
-      !guard ||
-      ((!guard.evidence || guard.evidence.test(evidence)) &&
-        (!guard.clauseNot || !guard.clauseNot.test(clauseText)));
-    if (c.present && flagText && guardOk && quote.length >= 8 && haystack.includes(quote) && !seenFlags.has(c.flag!)) {
-      seenFlags.add(c.flag!);
-      if (!shownQuotes.has(quote)) {
-        shownQuotes.add(quote);
-        issues.push(`${flagText}. The clause says: "${evidence}"`);
-      } else {
-        issues.push(`${flagText} (same sentence quoted above).`);
-      }
+    if (c.present && quote.length >= 8 && haystack.includes(quote)) modelEvidence.set(n, evidence);
+  }
+
+  for (let n = 1; n <= ref.red_flags.length; n++) {
+    const flagText = ref.red_flags[n - 1];
+    const guard = GUARDS[key][n - 1];
+    if (!flagText || !guard) continue;
+    if (guard.clauseNot && guard.clauseNot.test(clauseText)) continue;
+
+    let evidence = modelEvidence.get(n);
+    if (evidence && guard.evidence && !guard.evidence.test(evidence)) evidence = undefined;
+    if (!evidence && guard.evidence) evidence = sentences.find((s) => guard.evidence!.test(s));
+    if (!evidence) continue;
+
+    const quote = norm(evidence);
+    if (!shownQuotes.has(quote)) {
+      shownQuotes.add(quote);
+      issues.push(`${flagText}. The clause says: "${evidence}"`);
+    } else {
+      issues.push(`${flagText} (same sentence quoted above).`);
     }
+    seenFlags.add(n);
   }
 
   if (key === "payment_terms") {

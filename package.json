@@ -1,8 +1,7 @@
 {
-  "name": "lim",
+  "name": "lim-local",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Offline contract triage for freelancers using local Gemma 4 and Common Paper standard terms",
   "scripts": {
     "audit": "tsx audit.ts",
     "build:reference": "tsx build_reference.ts",
@@ -10,9 +9,16 @@
     "typecheck": "tsc --noEmit",
     "test": "npm run typecheck && npm run split:check"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "contract-review",
+    "ollama",
+    "gemma",
+    "freelancer",
+    "local-llm",
+    "hacktoberfest"
+  ],
+  "author": "Harjas Singh Bhatia",
+  "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
     "@types/node": "^26.6.5",
