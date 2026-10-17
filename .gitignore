@@ -1,0 +1,6 @@
+node_modules/
+dist/
+audit_report.html
+*.log
+.DS_Store
+Thumbs.db

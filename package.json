@@ -1,0 +1,27 @@
+{
+  "name": "lim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "audit": "tsx audit.ts",
+    "build:reference": "tsx build_reference.ts",
+    "split:check": "tsx splitter.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && npm run split:check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/pdf-parse": "^1.1.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "mammoth": "^1.13.0",
+    "pdf-parse": "^1.1.1"
+  }
+}

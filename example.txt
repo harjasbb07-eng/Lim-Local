@@ -1,0 +1,563 @@
+STATEMENT OF WORK (SOW)
+DELIVERABLES-BASED INFORMATION TECHNOLOGY SERVICES (DBITS)
+==========================================================================
+
+Project Name:                Permit Management Portal Modernization
+Technology Category:         Application Development and Modernization
+DIR Customer Name:           Lone Star Regional Water Authority (LSRWA)
+Vendor Name:                 Brightwave Technology Solutions, LLC
+DIR Contract No.:            DIR-DBITS-0000-2026
+SOW No.:                     LSRWA-SOW-2026-014
+SOW Date:                    October 16, 2026
+Customer Contract Manager:   Dana Whitfield, Director of IT Services
+                             dana.whitfield@lsrwa.example | (512) 555-0141
+Vendor Project Manager:      Marcus Okafor, PMP, Senior Project Manager
+                             marcus.okafor@brightwave.example | (512) 555-0187
+
+NOTE: All names, addresses, contract numbers and figures in this document
+are fictional sample data.
+
+
+1. INTRODUCTION
+--------------------------------------------------------------------------
+This Statement of Work describes the deliverables-based services that
+Brightwave Technology Solutions, LLC (the "Vendor") will provide to the
+Lone Star Regional Water Authority (the "Customer") for the Permit
+Management Portal Modernization project.
+
+At a summary level, the Vendor will replace the Customer's legacy,
+paper-assisted water-use permitting process with a secure, web-based
+portal. The portal will allow applicants to submit permit applications and
+supporting documents online, pay fees electronically, and track status,
+and will allow Customer staff to review, approve and report on permits.
+The resulting deliverables include project and requirements documentation,
+a system design, a two-release configured portal, migrated historical
+data, test and training materials, and go-live support.
+
+
+2. BACKGROUND
+--------------------------------------------------------------------------
+The Lone Star Regional Water Authority is a regional government entity
+that manages water supply, conservation and permitting for a 12-county
+service area. LSRWA processes approximately 9,500 water-use, well-drilling
+and discharge permit applications each year.
+
+The Customer is contracting for this deliverables-based service because
+its current permitting system, built in 2008 on an unsupported platform,
+relies on paper forms, manual data entry and email. Average permit
+turnaround is 41 days, staff spend an estimated 30 percent of their time
+on re-keying data, and the system no longer receives vendor security
+patches.
+
+In 2024 the LSRWA Board of Directors approved the Permit Modernization
+Initiative, funded through the FY2027 capital budget. Phase 1 of the
+initiative (this SOW) covers the applicant portal, staff review workflow,
+online payments and migration of five years of permit history. A possible
+Phase 2 would add a mobile inspection application and GIS integration and
+is not part of this SOW.
+
+
+3. SCOPE
+--------------------------------------------------------------------------
+
+3.1 PROJECT-BASED SERVICES
+
+3.1.1 Scope of Work
+The Vendor shall perform the following work:
+  a. Plan and manage the project in accordance with the project management
+     plan.
+  b. Analyze current business processes and document business, functional
+     and security requirements.
+  c. Design the portal architecture, user experience, integrations and
+     security controls.
+  d. Configure and build the portal in two releases:
+       Release 1 - applicant registration, online application intake,
+                   document upload and staff review workflow.
+       Release 2 - fee calculation and online payment, permit issuance,
+                   notifications, dashboards and standard reports.
+  e. Migrate five (5) years of historical permit records (approximately
+     47,000 records and 120,000 attached documents) from the legacy
+     system.
+  f. Integrate the portal with the Customer's payment gateway, Active
+     Directory single sign-on and email service.
+  g. Plan and conduct system, integration, performance, security and user
+     acceptance testing.
+  h. Develop and deliver training for Customer staff and public user
+     guides.
+  i. Support cutover to production and provide thirty (30) days of
+     post-go-live support ("hypercare").
+
+Out of scope: mobile applications, GIS integration, hardware procurement,
+legacy system decommissioning, and migration of records older than five
+years.
+
+3.1.2 Risks, Assumptions and Constraints
+  Risks:
+    - Legacy data may contain duplicates, missing fields or inconsistent
+      formats that extend migration effort.
+    - Key Customer subject matter experts may have limited availability
+      during the annual summer permit peak (June - August).
+    - The payment gateway provider may change its API during the project.
+  Assumptions:
+    - The Customer will provide access to the legacy database, test
+      environments and SMEs within two (2) business days of request.
+    - The Customer will provide a single decision-maker for requirements
+      and design approvals.
+    - The portal will be hosted in the Customer's existing approved
+      government cloud tenant.
+  Constraints:
+    - Total fixed price of $439,000.00; no work may begin on additional
+      scope without an approved change request.
+    - The portal must go live no later than August 31, 2027, before the
+      start of the FY2028 permit cycle.
+    - The solution must comply with Texas Administrative Code Chapter 202
+      and applicable accessibility requirements (WCAG 2.1 AA).
+
+3.1.3 Roles and Responsibilities
+
+  Customer Contract Manager (Dana Whitfield)
+    Oversees the contract; approves deliverables, schedule changes,
+    change requests and invoices; serves as primary point of contact.
+  Customer Business Owner (Permitting Division Manager)
+    Approves requirements and business rules; coordinates SME
+    participation and user acceptance testing.
+  Customer IT Security Officer
+    Reviews and approves security design and test results.
+  Vendor Project Manager (Marcus Okafor)
+    Manages schedule, budget, risks, issues, change control and
+    reporting; primary Vendor contact.
+  Vendor Technical Lead / Solution Architect
+    Leads design, build and integration; owns technical quality.
+  Vendor Business Analyst, Developers, QA Analysts, Trainer
+    Perform assigned tasks and produce deliverables.
+
+3.1.4 Detailed Description of Deliverables
+
+  Deliverable 1 - Project Management Plan
+    Includes scope, work breakdown structure, baseline schedule, resource
+    plan, communications plan, risk and issue management plan, change
+    control plan and quality plan.
+    Format: MS Word and MS Project.
+
+  Deliverable 2 - Requirements and Business Process Analysis Report
+    Documents current-state and future-state processes, user stories,
+    functional and non-functional requirements, and a requirements
+    traceability matrix.
+    Format: MS Word and MS Excel.
+
+  Deliverable 3 - System Architecture and Security Design Document
+    Describes the technical architecture, data model, integrations, user
+    interface wireframes, role-based access model, audit logging and
+    security controls.
+    Format: MS Word.
+
+  Deliverable 4 - Data Migration Plan
+    Defines data mapping, cleansing rules, migration approach, validation
+    criteria, rehearsal schedule and rollback procedures.
+    Format: MS Word and MS Excel.
+
+  Deliverable 5 - Portal Release 1
+    Deployed and configured applicant registration, online application
+    intake, document upload and staff review workflow in the Customer's
+    test environment, with release notes.
+    Format: Deployed system and MS Word release notes.
+
+  Deliverable 6 - Test Plan and User Acceptance Test (UAT) Cases
+    Describes test strategy, environments, test cases, defect management
+    and entry/exit criteria for all test phases.
+    Format: MS Word and MS Excel.
+
+  Deliverable 7 - Data Migration Execution and Validation Report
+    Migrated production-ready data with reconciliation of record counts
+    and sampled field-level validation results.
+    Format: Migrated data and MS Excel / MS Word report.
+
+  Deliverable 8 - Portal Release 2
+    Deployed fee calculation, online payment, permit issuance,
+    notifications, dashboards and standard reports, with release notes.
+    Format: Deployed system and MS Word release notes.
+
+  Deliverable 9 - Training Materials and Delivered Training
+    Staff training curriculum, up to six (6) instructor-led sessions for
+    up to 40 staff, administrator guide and public user guides.
+    Format: MS PowerPoint, MS Word and PDF.
+
+  Deliverable 10 - Go-Live, Hypercare and Project Closeout Report
+    Production cutover, 30 days of hypercare support, final lessons
+    learned, as-built documentation and knowledge transfer.
+    Format: Deployed system and MS Word report.
+
+3.1.5 Acceptance Criteria
+A deliverable is accepted when it (a) conforms to its description in
+Section 3.1.4, (b) meets the quality and service level requirements in
+Section 6, (c) is submitted in an approved format on or before its due
+date, and (d) is approved in writing by the Customer Contract Manager.
+
+Additional criteria:
+  - Document deliverables: no critical or high-priority review comments
+    remain open; the Customer has signed off on content.
+  - Software releases: 100 percent of critical and high-priority test
+    cases pass; no open Severity 1 or Severity 2 defects; no more than
+    ten (10) open Severity 3 defects with agreed fix dates; passes the
+    Customer's security scan with no critical or high findings.
+  - Data migration: record counts reconcile at 99.5 percent or better and
+    sampled field-level accuracy is 99 percent or better, with exceptions
+    documented and approved.
+  - Training: at least 90 percent of the target staff attend, and the
+    Customer approves the materials.
+
+3.1.6 Project Completion Criteria
+The project is complete when:
+  - All ten deliverables have been accepted in writing;
+  - The portal has been in production for thirty (30) days with no open
+    Severity 1 or Severity 2 defects;
+  - All open issues are resolved or formally transferred to the Customer;
+  - Knowledge transfer and as-built documentation are complete; and
+  - The Customer Contract Manager issues written project closeout.
+
+3.1.7 Project Schedule
+The Vendor shall achieve the dates in Section 4.2 and the baseline
+project schedule approved by the Customer. Key milestones:
+  Project start .......................... November 3, 2026
+  Kickoff meeting ........................ November 5, 2026
+  Design approved ........................ January 29, 2027
+  Release 1 delivered .................... April 16, 2027
+  Data migration validated ............... May 28, 2027
+  Release 2 delivered .................... June 25, 2027
+  Training complete ...................... July 23, 2027
+  Go-live and closeout ................... August 31, 2027
+
+3.1.8 Quality Processes
+  - Change management: Any change to scope, schedule or price requires a
+    written change request describing the change and its impact on cost,
+    schedule and risk, approved in writing by the Customer Contract
+    Manager before work begins. The Vendor will respond to Customer change
+    requests with an impact assessment within five (5) business days.
+  - Acceptance: Per Section 3.1.5 and Section 4.1.
+  - Risk and issue management: The Vendor shall maintain a risk and issue
+    log, review it in each weekly status meeting, and escalate unresolved
+    high-impact items to the Customer Contract Manager within one (1)
+    business day.
+  - Quality assurance: The Vendor shall perform internal peer review of
+    each deliverable before submission.
+
+3.2 OUTSOURCED SERVICES
+Not applicable to this SOW. The 30-day hypercare period is included in
+Deliverable 10 and is not an ongoing outsourced service.
+
+
+4. DELIVERABLES
+--------------------------------------------------------------------------
+
+4.1 DELIVERY REQUIREMENTS
+  1. Deliverables must be provided on the dates specified in Section 4.2.
+     Any change to a delivery date requires prior written approval from
+     the Customer Contract Manager or designee.
+  2. All deliverables must be submitted in a format approved by the
+     Customer Contract Manager.
+  3. If a deliverable cannot be provided within the scheduled time frame,
+     the Vendor shall notify the Customer Contract Manager in writing,
+     stating the reason for the delay and a proposed revised schedule. The
+     request must describe the impact on related tasks and on the overall
+     project.
+  4. A revised schedule takes effect only after the Customer Contract
+     Manager reviews and approves it. The Contract's terms and conditions
+     may dictate remedies, costs and other actions based on the facts of
+     the request.
+  5. The Customer will complete a review of each submitted deliverable
+     within ten (10) working days of the date of receipt and will provide
+     written acceptance or written comments. The Vendor will correct
+     deficiencies and resubmit within five (5) working days; the Customer
+     will re-review within five (5) working days.
+  6. A kickoff meeting will be held on November 5, 2026 at 10:00 AM
+     Central Time at the LSRWA Headquarters, 2200 Riverbend Parkway,
+     Austin, Texas 78701, where the Vendor and its staff will be
+     introduced to the Customer.
+
+4.2 DELIVERABLES SCHEDULE
+
+  No.  Deliverable Item                       SOW     Due Date     Recipient
+  ---  -------------------------------------  ------  -----------  ---------
+  1    Project Management Plan                3.1.4   11/20/2026   D. Whitfield
+  2    Requirements and Business Process      3.1.4   12/18/2026   D. Whitfield
+       Analysis Report
+  3    System Architecture and Security       3.1.4   01/29/2027   D. Whitfield
+       Design Document
+  4    Data Migration Plan                    3.1.4   02/12/2027   D. Whitfield
+  5    Portal Release 1                       3.1.4   04/16/2027   D. Whitfield
+  6    Test Plan and UAT Test Cases           3.1.4   04/30/2027   D. Whitfield
+  7    Data Migration Execution and           3.1.4   05/28/2027   D. Whitfield
+       Validation Report
+  8    Portal Release 2                       3.1.4   06/25/2027   D. Whitfield
+  9    Training Materials and Delivered       3.1.4   07/23/2027   D. Whitfield
+       Training
+  10   Go-Live, Hypercare and Project         3.1.4   08/31/2027   D. Whitfield
+       Closeout Report
+
+
+5. REPORTS AND MEETINGS
+--------------------------------------------------------------------------
+  1. Weekly progress reports. The Vendor shall deliver a written progress
+     report to the Customer Contract Manager by close of business (5:00 PM
+     Central Time) every Thursday for the life of the project.
+  2. Report content. Each report shall cover work performed and completed
+     during the reporting week, work planned for the following week,
+     schedule and budget status, and the current risk and issue log.
+  3. Problems. Each report shall identify problems encountered or still
+     outstanding, with an explanation of the cause and either the
+     resolution or the plan to resolve.
+  4. Weekly status meetings. The Vendor is responsible for conducting
+     weekly status meetings with the Customer Contract Manager every
+     Tuesday at 10:00 AM Central Time at a place designated by the
+     Customer Contract Manager, unless revised by the Customer Contract
+     Manager. Meetings may be held in person or by phone at the Customer
+     Contract Manager's discretion.
+  5. Monthly steering committee. The Vendor Project Manager shall present
+     project status to the LSRWA steering committee on the first
+     Wednesday of each month.
+
+
+6. SERVICE LEVEL AGREEMENT
+--------------------------------------------------------------------------
+The Vendor shall perform all work in accordance with the following service
+levels. Failure to meet a service level will be reviewed by the Customer
+Contract Manager and may result in the remedies below, in addition to any
+remedies in the Contract.
+
+  Area                    Measure / Target                        Remedy
+  ----------------------  --------------------------------------  ---------
+  Budget                  Total and each deliverable within the   Written
+                          fixed price; no unapproved overruns     recovery
+                                                                  plan
+  Schedule                Each deliverable submitted on or        Recovery
+                          before its due date; interim            plan; see
+                          milestones within 3 business days       4.1(4)
+  Security                Zero critical/high vulnerabilities at   Fix at no
+                          acceptance; compliance with TAC 202     cost
+  Quality                 First-submission acceptance rate of     Rework at
+                          at least 90 percent of deliverables     no cost
+  Availability (UAT/      99.0 percent during business hours      Root-cause
+  production hypercare)   (7 AM - 7 PM CT, Mon - Fri)             report
+  Performance             Page loads within 3 seconds for 95      Tune at no
+                          percent of requests at 200 concurrent   cost
+                          users
+  Mean time to            Severity 1: 4 hours; Severity 2: 1      Credit
+  resolution (hypercare)  business day; Severity 3: 5 business    against
+                          days                                    final
+                                                                  invoice
+  Business continuity     Documented backup and recovery plan;    Correct
+                          RPO of 4 hours and RTO of 8 hours       before
+                                                                  go-live
+  Standards               WCAG 2.1 AA; ISO/IEC 27001-aligned      Fix at no
+                          controls; IEEE 829 test documentation   cost
+  Required communications Weekly reports and meetings per         Warning;
+                          Section 5 delivered on time             escalation
+  Required documents      Plans, estimates, schedules and         Warning;
+                          analyses submitted on time              escalation
+  Estimate accuracy       Schedule and effort variance within     Recovery
+                          10 percent of baseline                  plan
+  Risk management         Risk log updated weekly; high risks     Warning
+                          escalated within 1 business day
+  Scope / change control  No work outside approved scope or       Work at
+                          unapproved change requests              Vendor cost
+  Data quality            Migration accuracy of at least 99       Re-migrate
+                          percent; reconciliation of 99.5         at no cost
+                          percent of records
+  Ad hoc query response   Standard reports return in under 10     Tune at no
+                          seconds on average                      cost
+  Reliability             Repeated queries return identical       Fix at no
+                          valid results                           cost
+  Consistency             Calculations and definitions are        Fix at no
+                          consistent regardless of source or      cost
+                          function
+  Acceptable usage        Role-based query controls restrict      Fix at no
+                          access to authorized data               cost
+  Migration mapping       No functions or data lost that were     Restore at
+                          not planned for retirement              no cost
+  Retirement of legacy    Legacy cutover completed by            Written
+                          08/31/2027 with parallel-run exit       recovery
+                          criteria met                            plan
+
+
+7. PERIOD OF PERFORMANCE
+--------------------------------------------------------------------------
+The Vendor shall conduct and complete all work under this SOW between
+November 3, 2026 and August 31, 2027, unless extended in writing by the
+Customer through the change management process in Section 3.1.8.
+
+
+8. INVOICES
+--------------------------------------------------------------------------
+The Vendor shall submit one invoice per deliverable upon the Customer's
+written acceptance of that deliverable. Each invoice must include: the DIR
+contract number (DIR-DBITS-0000-2026), the SOW number (LSRWA-SOW-2026-014)
+and project name, the deliverable number and name, the date of written
+acceptance, the amount due, and any supporting documentation requested by
+the Customer.
+
+Invoices shall be emailed in PDF format to accountspayable@lsrwa.example
+with a copy to dana.whitfield@lsrwa.example, or mailed to LSRWA Accounts
+Payable, 2200 Riverbend Parkway, Austin, Texas 78701.
+
+Ten (10) percent of the price of Deliverable 10 will be withheld until
+project completion criteria in Section 3.1.6 are met. Payments will be
+made in accordance with Appendix A of the Contract.
+
+
+9. CUSTOMER/VENDOR-FURNISHED EQUIPMENT AND WORK SPACE
+--------------------------------------------------------------------------
+  Customer-furnished:
+    - Access to the legacy permitting system and database (read-only)
+    - Development, test and production environments in the Customer's
+      government cloud tenant
+    - Active Directory accounts, VPN access and badge access for Vendor
+      staff
+    - Payment gateway sandbox credentials
+    - Shared workspace and a training room for up to 20 people at LSRWA
+      Headquarters when on-site work is required
+  Vendor-furnished:
+    - Laptops and all hardware and software needed by Vendor staff
+    - Development, testing and project management tools
+    - All licenses for Vendor-owned tools and the portal platform
+      identified in the Vendor's response
+  Work location:
+    Hybrid. Vendor staff will work on-site at LSRWA Headquarters for
+    kickoff, workshops, UAT, training and go-live, and may work remotely
+    at other times with Customer approval.
+
+
+10. ADDITIONAL CUSTOMER TERMS AND CONDITIONS
+--------------------------------------------------------------------------
+  1. Background checks: Vendor staff with access to Customer data must
+     pass a criminal background check acceptable to the Customer before
+     starting work.
+  2. Data ownership and handling: All Customer data and work products
+     created under this SOW are the property of the Customer. Customer data
+     may not be stored or processed outside the United States.
+  3. Security incidents: The Vendor shall notify the Customer within 24
+     hours of discovering any actual or suspected security incident
+     involving Customer data.
+  4. Key personnel: Named key personnel may not be replaced without 15
+     days' written notice and Customer approval of a qualified substitute.
+  5. Public information: This SOW and related records may be subject to
+     disclosure under the Texas Public Information Act.
+
+These terms do not conflict with or weaken the DIR master contract.
+
+
+11. VENDOR RESPONSE
+--------------------------------------------------------------------------
+The Vendor's response to this SOW must include the following.
+
+11.1 GENERAL REQUIREMENTS
+  1. All written deliverables must be phrased in language that
+     non-technical personnel can easily understand.
+  2. All document deliverables must be provided in the hard-copy and
+     electronic formats specified by the Customer and, at a minimum, in
+     industry-accepted standards (e.g., MS Word, MS PowerPoint, MS
+     Project).
+  3. The Vendor must demonstrate knowledge and expertise of the
+     environment in which the work will be performed (e.g., platforms,
+     software, applications, network, tools).
+  4. All work shall be performed in accordance with the Service Level
+     Agreement in Section 6.
+  5. The Vendor shall agree to the confidentiality and legal statements in
+     the Contract and this SOW.
+
+11.2 VENDOR STAFF CAPABILITIES
+  - Organization chart for the proposed project team
+  - Resumes of the management team
+  - Resumes of key personnel: Project Manager, Solution Architect,
+    Technical Lead, Lead Business Analyst, QA Lead, Training Lead
+
+11.3 VENDOR SERVICES CAPABILITIES
+  - Outline of the Vendor's capability to deliver the required services,
+    including process, functional and technical expertise, with at least
+    three (3) similar government permitting or licensing projects
+  - Agreed-upon SOW for deliverables-based services
+  - Project plan, including transition from the legacy system
+  - Project management plan addressing the tasks specified in this SOW
+
+
+12. PRICING
+--------------------------------------------------------------------------
+This is a fixed-price, deliverables-based SOW. Prices include all labor,
+travel, tools and expenses.
+
+  Deliverable No.  Deliverable Name                            Price
+  ---------------  ------------------------------------------  -----------
+  1                Project Management Plan                     $ 18,500.00
+  2                Requirements and Business Process
+                   Analysis Report                             $ 42,000.00
+  3                System Architecture and Security
+                   Design Document                             $ 38,500.00
+  4                Data Migration Plan                         $ 24,000.00
+  5                Portal Release 1                            $ 96,000.00
+  6                Test Plan and UAT Test Cases                $ 21,000.00
+  7                Data Migration Execution and
+                   Validation Report                           $ 47,500.00
+  8                Portal Release 2                            $ 84,000.00
+  9                Training Materials and Delivered Training   $ 29,500.00
+  10               Go-Live, Hypercare and Project
+                   Closeout Report                             $ 38,000.00
+                                                               -----------
+                   TOTAL                                       $439,000.00
+
+Assumptions:
+  - Pricing is based on the scope, volumes and schedule in this SOW,
+    including approximately 47,000 records and 120,000 documents.
+  - The Customer provides timely access, decisions and SME availability
+    per Section 3.1.2.
+  - Up to two (2) review cycles per document deliverable are included.
+  - Customer UAT effort is performed by Customer staff.
+
+Exclusions:
+  - Third-party licensing or hosting fees paid directly by the Customer
+  - Payment gateway transaction fees
+  - Mobile applications, GIS integration, and data older than five years
+  - Support after the 30-day hypercare period
+
+
+13. RESPONSE SUBMISSION REQUIREMENTS
+--------------------------------------------------------------------------
+  SOW schedule of events:
+    SOW issued to Vendor ................... October 16, 2026
+    Deadline for Vendor questions .......... October 21, 2026, 5:00 PM CT
+    Deadline for Customer answers .......... October 23, 2026, 5:00 PM CT
+    Response due date ...................... October 28, 2026, 3:00 PM CT
+    Anticipated SOW award .................. October 30, 2026
+    Project start .......................... November 3, 2026
+
+  Address for response submission:
+    Dana Whitfield, Director of IT Services
+    Lone Star Regional Water Authority
+    2200 Riverbend Parkway, Austin, Texas 78701
+    Electronic submission: sow-responses@lsrwa.example
+
+  Number of copies:
+    One (1) electronic copy in PDF and one (1) in MS Word, plus three (3)
+    bound hard copies.
+
+  Mandatory response contents:
+    1. Signed cover letter by an authorized Vendor representative
+    2. Response to each item in Section 11
+    3. Proposed project schedule and project plan summary
+    4. Completed pricing sheet (Section 12) with assumptions and
+       exclusions
+    5. Three (3) customer references for similar projects
+    6. Acknowledgment of the service levels in Section 6 and the
+       additional terms in Section 10
+
+
+14. SIGNATURES
+--------------------------------------------------------------------------
+By signing below, the parties agree to the terms of this Statement of Work
+under DIR Contract No. DIR-DBITS-0000-2026.
+
+LONE STAR REGIONAL WATER AUTHORITY      BRIGHTWAVE TECHNOLOGY SOLUTIONS, LLC
+
+Name:      Dana Whitfield               Name:      Priya Raman
+Title:     Director of IT Services      Title:     Vice President, Public
+                                                   Sector
+Signature: ______________________       Signature: ______________________
+Date:      ______________________       Date:      ______________________

@@ -1,0 +1,120 @@
+{
+  "attribution": "Common Paper Professional Services Agreement (PSA) Standard Terms v1.1, © Common Paper, licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Source: https://github.com/CommonPaper/PSA. Changes made: HTML formatting removed; wording otherwise unchanged. Not endorsed by Common Paper. The tool principles and red flags used in this comparison are Lim Local's own interpretation, not Common Paper text.",
+  "source_file": "vendor/PSA/psa.md",
+  "cover_page_note": "psa.md contains the Standard Terms only. Values such as the General Cap Amount, Time of Assignment, Payment Period, Rejection Period and Covered Claims are Cover Page/SOW variables that each deal sets, so they are not fixed defaults in this file.",
+  "clauses": {
+    "indemnification": {
+      "clause_type": "indemnification",
+      "verbatim_sections": [
+        {
+          "ref": "§8.1",
+          "section_title": "Limitation of Liability",
+          "title": "Liability Caps",
+          "text": "Liability Caps. If there are Increased Claims, each party’s total cumulative liability for the Increased Claims arising out of or relating to this Agreement will not be more than the Increased Cap Amount. Each party’s total cumulative liability for all other claims arising out of or relating to this Agreement will not be more than the General Cap Amount."
+        },
+        {
+          "ref": "§8.2",
+          "section_title": "Limitation of Liability",
+          "title": "Damages Waiver",
+          "text": "Damages Waiver. Each party’s liability for any claim or liability arising out of or relating to this Agreement will be limited to the fullest extent permitted by Applicable Laws. Under no circumstances will either party be liable to the other for lost profits or revenues, or for consequential, special, indirect, exemplary, punitive, or incidental damages relating to this Agreement, even if the party is informed of the possibility of this type of damage in advance."
+        },
+        {
+          "ref": "§8.3",
+          "section_title": "Limitation of Liability",
+          "title": "Exceptions",
+          "text": "Exceptions. The liability caps in Section 8.1 do not apply to any Unlimited Claims. The damages waiver in Section 8.2 does not apply to any Increased Claims or a breach of Section 11 (Confidentiality)."
+        },
+        {
+          "ref": "§9.1",
+          "section_title": "Indemnification",
+          "title": "Protection by Provider",
+          "text": "Protection by Provider. Provider will indemnify, defend, and hold harmless Customer from and against all Provider Covered Claims made by someone other than Customer or its Affiliates, and all out-of-pocket damages, awards, settlements, costs, and expenses, including reasonable attorneys’ fees and other legal expenses, that arise from the Provider Covered Claim."
+        },
+        {
+          "ref": "§9.2",
+          "section_title": "Indemnification",
+          "title": "Protection by Customer",
+          "text": "Protection by Customer. Customer will indemnify, defend, and hold harmless Provider from and against all Customer Covered Claims made by someone other than Provider or its Affiliates, and all out-of-pocket damages, awards, settlements, costs, and expenses, including reasonable attorneys’ fees and other legal expenses, that arise from the Customer Covered Claim."
+        },
+        {
+          "ref": "§9.3",
+          "section_title": "Indemnification",
+          "title": "Procedure",
+          "text": "Procedure. The Indemnifying Party’s obligations in this section are contingent upon the Protected Party: (a) promptly notifying the Indemnifying Party of each Covered Claim for which it seeks protection; (b) providing reasonable assistance to the Indemnifying Party at the Indemnifying Party’s expense; and (c) giving the Indemnifying Party sole control over the defense and settlement of each Covered Claim. A Protected Party may participate in a Covered Claim for which it seeks protection with its own attorneys only at its own expense. The Indemnifying Party may not agree to any settlement of a Covered Claim that contains an admission of fault or otherwise materially and adversely impacts the Protected Party without the prior written consent of the Protected Party."
+        },
+        {
+          "ref": "§9.4",
+          "section_title": "Indemnification",
+          "title": "Exclusive Remedy",
+          "text": "Exclusive Remedy. This Section 9 (Indemnification) describes each Protected Party’s exclusive remedy and each Indemnifying Party’s entire liability for a Covered Claim."
+        }
+      ],
+      "tool_principle": "Indemnity is mutual and limited to claims brought by third parties (§9.1, §9.2); each party's Covered Claims are defined on the Cover Page. Indemnity is the exclusive remedy for a Covered Claim (§9.4). Liability is capped (§8.1) at an amount negotiated on the Cover Page, and lost profits and consequential damages are waived (§8.2). Anything outside the cap has to be named as an Unlimited Claim (§8.3).",
+      "red_flags": [
+        "One-sided indemnity where only the Contractor indemnifies (the PSA is mutual, §9.1-9.2)",
+        "Indemnity triggered by any breach or by the Contractor's services in general, instead of defined third-party Covered Claims (§9.1)",
+        "No liability cap, or 'without limitation' language (§8.1, §8.3)",
+        "No waiver of lost profits and consequential damages (§8.2)"
+      ]
+    },
+    "ip_ownership": {
+      "clause_type": "ip_ownership",
+      "verbatim_sections": [
+        {
+          "ref": "§2.1",
+          "section_title": "Intellectual Property",
+          "title": "Deliverables",
+          "text": "Deliverables. Except for Pre-Existing Materials and Third-Party Materials, Provider assigns all right, title, and interest in the Deliverables (if any) to Customer at the Time of Assignment. Upon the Time of Assignment, Provider will assert no rights over such Deliverables."
+        },
+        {
+          "ref": "§2.3",
+          "section_title": "Intellectual Property",
+          "title": "Pre-Existing Materials",
+          "text": "Pre-Existing Materials. To the extent Provider incorporates Pre-Existing Materials into Deliverables, Provider grants Customer a non-exclusive, non-transferrable, perpetual, irrevocable, worldwide license to use Pre-Existing Materials only as necessary to use the Deliverables according to this Agreement."
+        },
+        {
+          "ref": "§13.14",
+          "section_title": "Definitions",
+          "title": "Pre-Existing Materials",
+          "text": "\"Pre-Existing Materials\" means any information, tools, materials, or intellectual property that Provider developed or owned before the Effective Date or developed after the Effective Date that are independent from or outside the scope of the Agreement, and any derivatives of these items that are not unique to Customer or that have generally applicable use and do not incorporate or disclose any Customer Confidential Information."
+        }
+      ],
+      "tool_principle": "The Provider assigns Deliverables to the Customer at a Time of Assignment chosen in the SOW: either as they are created or upon payment of the associated Fees (§2.1). Pre-Existing Materials and Third-Party Materials are excluded from the assignment, and the Customer only receives a license to Pre-Existing Materials needed to use the Deliverables (§2.3, §13.14). The PSA's own commentary avoids the work-made-for-hire concept. A contractor-friendly contract ties assignment to payment and keeps reusable tools and libraries out of the assignment.",
+      "red_flags": [
+        "Assignment on creation regardless of whether fees have been paid (the PSA treats Time of Assignment as a negotiated choice, §2.1)",
+        "'Work made for hire' or blanket assignment of all tools, libraries and materials used by the Contractor, instead of excluding Pre-Existing Materials (§2.1, §2.3)",
+        "Contractor's reusable tooling is assigned rather than licensed (§2.3)"
+      ]
+    },
+    "payment_terms": {
+      "clause_type": "payment_terms",
+      "verbatim_sections": [
+        {
+          "ref": "§1.4",
+          "section_title": "Services",
+          "title": "Acceptance",
+          "text": "Acceptance. If according to the SOW Deliverables are subject to this section, Customer will be deemed to have approved a Deliverable if Customer does not reject the Deliverable within the Rejection Period. If Customer rejects a Deliverable, Customer must notify Provider in writing with reasonable detail about why the Deliverable did not meet the requirements in the SOW. Provider will correct the issue and resubmit the Deliverable within the Resubmission Period."
+        },
+        {
+          "ref": "§4.2",
+          "section_title": "Payment & Taxes",
+          "title": "Payment",
+          "text": "Payment. Customer will pay Provider the Fees and taxes in each invoice in U.S. Dollars, unless the SOW specifies a different currency, within the Payment Period."
+        },
+        {
+          "ref": "§4.4",
+          "section_title": "Payment & Taxes",
+          "title": "Payment Dispute",
+          "text": "Payment Dispute. If Customer has a good-faith disagreement about the amounts charged on an invoice, Customer must notify Provider about the dispute during the Payment Period for the invoice and must pay all undisputed amounts on time. The parties will work together to resolve the dispute within 15 days after the end of the Payment Period. If no resolution is agreed, each party may pursue any remedies available under the Agreement, the applicable SOW, or Applicable Laws."
+        }
+      ],
+      "tool_principle": "The Customer pays invoiced Fees within a Payment Period set in the SOW; 30 days from receipt of invoice is only the template's example, not a fixed default (§4.2). Good-faith invoice disputes must be raised within the Payment Period and undisputed amounts must still be paid on time (§4.4). Where acceptance applies, a Deliverable is deemed approved if not rejected within the SOW's Rejection Period (§1.4). The PSA does not make payment conditional on the Customer being paid by its own customers.",
+      "red_flags": [
+        "Payment period much longer than the common 30-day example, such as 60 or 90 days (tool heuristic; the PSA leaves the period to the SOW, §4.2)",
+        "Pay-when-paid: payment conditioned on the client being paid by its own customers (§4.2 requires payment within the Payment Period)",
+        "Acceptance in the client's sole discretion with no deemed-approval deadline (§1.4)",
+        "Withholding undisputed amounts, or no dispute process (§4.4)"
+      ]
+    }
+  }
+}
