@@ -99,6 +99,7 @@ After the model is downloaded, an audit makes no network calls except to Ollama 
 | `sample_fair_sow.md` | Balanced contract based on Common Paper style terms. Should come back LOW. |
 | `messy_sow.txt` | Unnumbered plain-text headings, to test the splitter. |
 | `example.txt` | A longer government-style SOW that defers most legal terms to a master contract. |
+| `freelance-services-agreement_COMPLETE_TEST.docx` | Realistic test fixture with deliberate addendum traps, run by external tester. |
 
 ## Scripts
 
@@ -127,6 +128,7 @@ Set the `LIM_MODEL` environment variable to try a different Ollama model, for ex
 | `sample_fair_sow.md` | All three LOW. Also tested as `.docx` and `.pdf` with the same result. |
 | `messy_sow.txt` | All three found and rated HIGH. |
 | `example.txt` | Payment found and rated MEDIUM (no deadline stated, retainage holdback). IP and indemnification reported as not found. |
+
 
 These are small test sets and several rules were tuned while looking at them. Treat the results as a demonstration, not a measured accuracy figure.
 
