@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
 
-// Run from the project root (D:\Lim):  npx tsx build_reference.ts
 const ROOT = process.cwd();
 const PSA_PATH = path.join(ROOT, "vendor", "PSA", "psa.md");
 const OUT_PATH = path.join(ROOT, "reference_clauses.json");
@@ -16,10 +15,6 @@ if (!fs.existsSync(PSA_PATH)) fail(`Cannot find ${PSA_PATH}`);
 
 const lines = fs.readFileSync(PSA_PATH, "utf-8").split(/\r?\n/);
 
-// psa.md format:
-//   "9. <span class="header_2">Indemnification</span>"            -> top-level section
-//   "    1. <span class="header_3">Title.</span>  body text"       -> subsection (4 spaces)
-//   "        a. body text"                                         -> sub-item (8 spaces)
 const TOP = /^(\d+)\.\s+<span class="header_2">(.*?)<\/span>/;
 const SUB = /^ {4}(\d+)\.\s+(.*)$/;
 
@@ -34,12 +29,11 @@ const topTitles = new Map<number, string>();
 function titleOf(raw: string): string {
   const h3 = raw.match(/<span class="header_3">(.*?)<\/span>/);
   if (h3) return h3[1].replace(/\.$/, "").trim();
-  const def = raw.match(/^\*\*"(.*?)"\*\*/); // Section 13 definitions
+  const def = raw.match(/^\*\*"(.*?)"\*\*/);
   if (def) return def[1];
   return "";
 }
 
-// Strip HTML span markup and bold markers only; wording is left unchanged.
 function clean(s: string): string {
   return s
     .replace(/<[^>]+>/g, "")
@@ -88,7 +82,7 @@ function get(ref: string): Block {
 }
 
 const referenceData = {
- attribution:
+  attribution:
     "Common Paper Professional Services Agreement (PSA) Standard Terms v1.1, © Common Paper, licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Source: https://github.com/CommonPaper/PSA. Changes made: HTML formatting removed; wording otherwise unchanged. Not endorsed by Common Paper. The tool principles and red flags used in this comparison are Lim Local's own interpretation, not Common Paper text.",
   source_file: "vendor/PSA/psa.md",
   cover_page_note:
@@ -127,16 +121,11 @@ const referenceData = {
         "Pay-when-paid: payment conditioned on the client being paid by its own customers (§4.2 requires payment within the Payment Period)",
         "Acceptance in the client's sole discretion with no deemed-approval deadline (§1.4)",
         "Withholding undisputed amounts, or no dispute process (§4.4)",
+        "Refund or claw-back of amounts already paid at the client's discretion, or being required to keep working while payment is withheld (tool heuristic, not a Common Paper term)",
       ],
     },
   },
 };
 
 fs.writeFileSync(OUT_PATH, JSON.stringify(referenceData, null, 2), "utf-8");
-
-console.log(`Parsed ${subs.size} subsections from psa.md. Wrote ${OUT_PATH}\n`);
-for (const [type, c] of Object.entries(referenceData.clauses)) {
-  for (const b of c.verbatim_sections) {
-    console.log(`${type.padEnd(15)} ${b.ref.padEnd(7)} ${String(b.text.length).padStart(5)} chars  ${b.title}`);
-  }
-}
+console.log(`Parsed ${subs.size} subsections from psa.md. Wrote ${OUT_PATH}`);

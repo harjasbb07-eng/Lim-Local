@@ -68,44 +68,115 @@ const REDLINE_GUIDE: Record<ClauseKey, string> = {
     "Make the indemnity mutual and limited to third-party claims. Cap each party's total liability at the fees paid or payable under the agreement in the previous twelve months. Waive lost profits and consequential damages for both parties.",
 };
 
-const LEAK_PATTERN =
-  /§|\bPSA\b|Common Paper|Time of Assignment|Covered Claims?|Cover Page|Payment Period|Rejection Period|General Cap Amount|\bSections?\s+\d+\.\d+/i;
+const PSA_TERMS = [
+  "Payment Period",
+  "Rejection Period",
+  "Time of Assignment",
+  "Covered Claim",
+  "General Cap Amount",
+  "Cover Page",
+  "Provider",
+  "Customer",
+  "Third-Party Materials",
+];
+
+const REF_PATTERNS = [
+  /§\s*\d+(?:\.\d+)*/g,
+  /\bPSA\b/g,
+  /Common Paper/gi,
+  /\bSections?\s+\d+(?:\.\d+)+/gi,
+];
+
+function leakedRefs(text: string, clauseText: string): string[] {
+  const out: string[] = [];
+  for (const p of REF_PATTERNS) {
+    for (const m of text.match(p) ?? []) {
+      if (!clauseText.includes(m)) out.push(m);
+    }
+  }
+  for (const t of PSA_TERMS) {
+    if (text.includes(t) && !clauseText.includes(t)) out.push(t);
+  }
+  return out;
+}
+
+function scrubReference(text: string, clauseText: string): string {
+  const has = (t: string) => clauseText.includes(t);
+  const role =
+    ["Freelancer", "Contractor", "Consultant", "Vendor", "Developer", "Agency"].find(has) ??
+    "Contractor";
+  const client = ["Client", "Customer", "Company"].find(has) ?? "Client";
+  let s = text;
+  if (!has("Provider")) s = s.replace(/\bProvider\b/g, role);
+  if (!has("Customer")) s = s.replace(/\bCustomer\b/g, client);
+  const swaps: [RegExp, string][] = [
+    [/\bPayment Period\b/g, "payment period"],
+    [/\bRejection Period\b/g, "review period"],
+    [/\bTime of Assignment\b/g, "time of assignment"],
+    [/\bCovered Claims\b/g, "third-party claims"],
+    [/\bCovered Claim\b/g, "third-party claim"],
+    [/\bGeneral Cap Amount\b/g, "liability cap"],
+    [/\bCover Page\b/g, "agreement"],
+    [/\bThird-Party Materials\b/g, "third-party materials"],
+  ];
+  for (const [re, rep] of swaps) {
+    s = s.replace(re, (m) => (has(m) ? m : rep));
+  }
+  return s;
+}
+
+function leaksReference(audit: AuditResponse, clauseText: string): boolean {
+  return leakedRefs(`${audit.suggested_redline} ${audit.negotiation_talking_point}`, clauseText).length > 0;
+}
 
 interface Guard {
   evidence?: RegExp;
   clauseNot?: RegExp;
 }
 
+const PARTY = "(?:freelancer|contractor|consultant|developer|vendor|provider|supplier|agency)";
+
 const GUARDS: Record<ClauseKey, Guard[]> = {
   indemnification: [
     {
-      evidence: /contractor (shall|will|agrees to) (indemnif|defend|hold)|contractor is liable/i,
-      clauseNot: /each party|either party|both parties|mutual/i,
+      evidence: new RegExp(
+        `\\b${PARTY} (?:shall|will|agrees to|must) (?:indemnif|defend|hold)|\\b${PARTY} is (?:solely |fully )?(?:liable|responsible)`,
+        "i"
+      ),
+      clauseNot:
+        /each party|either party|both parties|mutual|(?:client|customer) (?:shall|will|agrees to) (?:also )?(?:indemnif|defend|hold)/i,
     },
     {
-      evidence: /any breach|performance|services|any and all/i,
-      clauseNot: /third[\s-]party/i,
+      evidence: /any breach|performance|services|any and all|caused (?:partly|in whole|entirely|wholly)/i,
+      clauseNot:
+        /third[\s-]party claims?|(?:limited|restricted)(?: (?:solely|strictly|exclusively))? to (?:claims )?(?:brought )?(?:by )?third[\s-]part(?:y|ies)|claims? (?:brought )?by (?:a )?third[\s-]part(?:y|ies)/i,
     },
     {
-      evidence: /without limitation|unlimited|uncapped|no (limit|cap)/i,
-      clauseNot: /shall not exceed|capped|\bcap\b|limited to the (total )?(fees|amount)/i,
+      evidence:
+        /without limitation|unlimited|uncapped|no (?:limit|cap)|(?:cap|limit\w*)[^.]*(?:do|does) not apply/i,
+      clauseNot:
+        /(?:shall not exceed|limited to the (?:total )?(?:fees|amount)|capped at|cap of)(?![^.]*(?:do|does) not apply)/i,
     },
     {
       evidence: /damages|losses|liabilit|profits/i,
-      clauseNot: /(neither party|in no event|under no circumstances|waives?)[^.]*(consequential|lost profits|indirect)/i,
+      clauseNot:
+        /(?:neither party|in no event|under no circumstances|waives?|excludes?)[^.]*(?:consequential|lost profits|indirect)/i,
     },
   ],
   ip_ownership: [
     {
-      evidence: /creation|immediately|upon (signing|execution)|regardless|belong/i,
-      clauseNot: /(upon|after|following) (the )?(receipt of )?(full |final )?payment|once (fully )?paid/i,
+      evidence:
+        /creation|immediately|upon (?:signing|execution)|regardless|belong|whether or not (?:the )?(?:client )?(?:has )?paid/i,
+      clauseNot: /(?:upon|after|following|until) (?:the )?(?:receipt of )?(?:full |final )?payment|once (?:fully )?paid/i,
     },
     {
-      evidence: /work made for hire|work for hire|all (work product|tools|libraries|materials|inventions)|background|software routines|developer scripts/i,
-      clauseNot: /retains?\b|excluding|excludes/i,
+      evidence:
+        /work made for hire|work for hire|\ball\b[^.;]{0,120}?(?:tools|libraries|materials|inventions|templates|know-how)|background|software routines|developer scripts/i,
+      clauseNot: /retains?\b|exclud(?:es|ing|ed)/i,
     },
     {
-      evidence: /assign|belong|transfer|own/i,
+      evidence:
+        /\bassign|\bbelongs?\b|\btransfer|\bowns?\b|\bownership\b|(?:become|becomes|is|are|be)\s+(?:the\s+)?(?:client's\s+)?(?:sole\s+|exclusive\s+)?property/i,
       clauseNot: /retains?\b|licen[sc]e/i,
     },
   ],
@@ -114,15 +185,23 @@ const GUARDS: Record<ClauseKey, Guard[]> = {
       evidence: /\b(60|90|120|45|sixty|ninety|forty[\s-]five)\b|net[\s-]?(45|60|90)/i,
     },
     {
-      evidence: /pay[\s-]when[\s-]paid|conditioned|contingent|collect|withhold|own customers?/i,
+      evidence:
+        /pay[\s-]when[\s-]paid|pay[\s-]if[\s-]paid|(?:conditioned|contingent|dependent)[^.]*(?:collect|customer|receipt of (?:funds|payment))|(?:own|ultimate) customers?[^.]*(?:paid|payment)/i,
     },
     {
-      evidence: /sole discretion|at any time|without (limitation|a deemed)|deemed approval window/i,
+      evidence:
+        /(?:accept|approv|reject)[^.]*(?:sole discretion|at any time|without (?:limitation|a deemed)|deemed approval window)|(?:sole discretion|at any time)[^.]*(?:accept|approv|reject)|deemed approval window/i,
       clauseNot: /deemed approved|deemed accepted/i,
     },
     {
-      evidence: /undisputed|set[\s-]?off|offset|refuse to pay/i,
-      clauseNot: /undisputed amounts? (on time|within|on schedule)|remitting all undisputed/i,
+      evidence:
+        /undisputed|withhold(?![^.]*(?:own|ultimate) customers?)|set[\s-]?off|offset|refuse to pay|delay (?:any )?payment/i,
+      clauseNot: /undisputed amounts? (?:on time|within|on schedule)|remitting all undisputed/i,
+    },
+    {
+      evidence:
+        /\brefund|claw[\s-]?back|continue performing[^.]*(?:withheld|unpaid|overdue)|continue (?:to )?(?:perform|work)[^.]*while[^.]*(?:withheld|unpaid)/i,
+      clauseNot: /non[\s-]?refundable/i,
     },
   ],
 };
@@ -211,17 +290,16 @@ function parseAudit(raw: string, key: ClauseKey, ref: ReferenceClause, clauseTex
   const issues: string[] = [];
   const notes: string[] = [];
 
-  const sentences = clauseText
-    .split(/(?<=[.;])\s+/)
-    .map((s) => s.trim())
-    .filter(Boolean);
+  const sentences = clauseText.split(/(?<=[.;])\s+/).map((s) => s.trim()).filter(Boolean);
   const modelEvidence = new Map<number, string>();
 
   for (const c of obj.checks ?? []) {
     const n = c.flag ?? 0;
     const evidence = String(c.evidence ?? "").trim();
     const quote = norm(evidence).replace(/^["']+|["']+$/g, "");
-    if (c.present && quote.length >= 8 && haystack.includes(quote)) modelEvidence.set(n, evidence);
+    if (c.present && quote.length >= 8 && haystack.includes(quote)) {
+      modelEvidence.set(n, evidence);
+    }
   }
 
   for (let n = 1; n <= ref.red_flags.length; n++) {
@@ -258,10 +336,22 @@ function parseAudit(raw: string, key: ClauseKey, ref: ReferenceClause, clauseTex
     issues.length >= 2 ? "HIGH" : issues.length === 1 || notes.length > 0 ? "MEDIUM" : "LOW";
 
   const noDeadline = notes.some((n) => n.startsWith("No payment deadline"));
-  let redline = String(obj.suggested_redline ?? "");
+  const retainage = notes.some((n) => n.startsWith("A portion of payment"));
 
+  let redline = String(obj.suggested_redline ?? "");
   if (issues.length === 0 && notes.length > 0) {
-    redline = noDeadline ? `${clauseText.trim()} Payments will be made within 30 days of receipt of a valid invoice.` : "";
+    redline = noDeadline
+      ? `${clauseText.trim()} Payments will be made within 30 days of receipt of a valid invoice.`
+      : "";
+  }
+
+  let talking = String(obj.negotiation_talking_point ?? "");
+  if (issues.length === 0 && notes.length > 0) {
+    talking = noDeadline
+      ? "Could we state a payment deadline in this section, for example 30 days from receipt of a valid invoice, or point me to where it is set?"
+      : retainage
+        ? "Could we agree in writing when the withheld portion will be released?"
+        : "";
   }
 
   const copied = norm(redline) === norm(clauseText);
@@ -270,17 +360,17 @@ function parseAudit(raw: string, key: ClauseKey, ref: ReferenceClause, clauseTex
     clause_type: key,
     risk_level: risk,
     common_paper_citation: validateCitation(
-      String(obj.common_paper_citation ?? "") + " " + Array.from(seenFlags).map((n) => ref.red_flags[n - 1]).join(" "),
+      String(obj.common_paper_citation ?? "") +
+        " " +
+        Array.from(seenFlags)
+          .map((n) => ref.red_flags[n - 1])
+          .join(" "),
       ref
     ),
     issues_found: [...issues, ...notes],
-    suggested_redline: risk === "LOW" || copied ? "" : redline,
-    negotiation_talking_point: risk === "LOW" ? "" : String(obj.negotiation_talking_point ?? ""),
+    suggested_redline: risk === "LOW" || copied ? "" : scrubReference(redline, clauseText),
+    negotiation_talking_point: risk === "LOW" ? "" : scrubReference(talking, clauseText),
   };
-}
-
-function leaksReference(audit: AuditResponse): boolean {
-  return LEAK_PATTERN.test(audit.suggested_redline) || LEAK_PATTERN.test(audit.negotiation_talking_point);
 }
 
 export async function auditSingleClause(
@@ -327,11 +417,17 @@ export async function auditSingleClause(
       if (data.done_reason === "length") {
         throw new Error(`Model output was cut off after ${data.eval_count ?? "?"} tokens.`);
       }
+
       const audit = parseAudit(data.response, key, ref, clauseText);
-      if (attempt < MAX_ATTEMPTS && leaksReference(audit)) {
-        strict = true;
-        throw new Error("Redline referred to PSA terms; retrying with a stricter prompt.");
+      if (leaksReference(audit, clauseText)) {
+        if (attempt < MAX_ATTEMPTS) {
+          strict = true;
+          throw new Error("Redline referred to PSA terms; retrying with a stricter prompt.");
+        }
+        audit.suggested_redline = "";
+        audit.negotiation_talking_point = "";
       }
+
       const tokens = data.eval_count ?? 0;
       const evalSeconds = (data.eval_duration ?? 0) / 1e9;
       return {

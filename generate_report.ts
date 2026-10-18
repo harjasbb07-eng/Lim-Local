@@ -113,13 +113,13 @@ function renderItem(item: ReportItem, index: number): string {
     <tbody>
       <tr>
         <td class="prose">${esc(item.text)}</td>
-        <td class="prose" id="redline-${index}">${esc(a.suggested_redline)}</td>
+        <td class="prose" id="redline-${index}">${esc(a.suggested_redline) || "No redline suggested for this section."}</td>
       </tr>
     </tbody>
   </table>
 
   <h3>Negotiation position ${copyLink(`pitch-${index}`)}</h3>
-  <blockquote id="pitch-${index}">${esc(a.negotiation_talking_point)}</blockquote>`;
+  <blockquote id="pitch-${index}">${esc(a.negotiation_talking_point) || "No negotiation line suggested."}</blockquote>`;
 }
 
 export function generateHtmlReport(input: ReportInput, outputPath: string): void {

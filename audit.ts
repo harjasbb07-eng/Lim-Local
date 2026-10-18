@@ -36,25 +36,30 @@ async function main() {
   console.log(`  Model   ${MODEL}`);
   console.log(`  Found   ${found.length} of 3 target clauses (${found.map((c) => c.key).join(", ") || "none"})\n`);
 
+  console.log("  Loading model and starting analysis (initial load may take a moment)...\n");
+
   const started = Date.now();
   const items: ReportItem[] = [];
 
   for (const clause of found) {
+    process.stdout.write(`  ${clause.key.padEnd(16)}  analyzing...`);
     try {
       const { audit, stats } = await auditSingleClause(clause.key, clause.text, refData.clauses[clause.key]);
-      console.log(
-        `  ${clause.key.padEnd(16)}  ${audit.risk_level.padEnd(6)}  ${stats.seconds.toFixed(1).padStart(5)} s  ${stats.tokensPerSecond.toFixed(1).padStart(5)} tokens/s`
+      process.stdout.write(
+        `\r  ${clause.key.padEnd(16)}  ${audit.risk_level.padEnd(6)}  ${stats.seconds.toFixed(1).padStart(5)} s  ${stats.tokensPerSecond.toFixed(1).padStart(5)} tokens/s      \n`
       );
       items.push({ key: clause.key, heading: clause.heading, text: clause.text, audit, stats });
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.log(`  ${clause.key.padEnd(16)}  failed: ${msg}`);
+      process.stdout.write(`\r  ${clause.key.padEnd(16)}  failed: ${msg}\n`);
       items.push({ key: clause.key, heading: clause.heading, text: clause.text, error: msg });
       process.exitCode = 1;
     }
   }
 
-  const outputPath = path.join(ROOT, "audit_report.html");
+  const baseName = path.basename(inputPath, path.extname(inputPath));
+  const outputPath = path.join(ROOT, `audit_${baseName}.html`);
+
   generateHtmlReport(
     {
       sourceFile: path.basename(inputPath),

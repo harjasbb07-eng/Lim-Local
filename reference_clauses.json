@@ -113,7 +113,8 @@
         "Payment period much longer than the common 30-day example, such as 60 or 90 days (tool heuristic; the PSA leaves the period to the SOW, §4.2)",
         "Pay-when-paid: payment conditioned on the client being paid by its own customers (§4.2 requires payment within the Payment Period)",
         "Acceptance in the client's sole discretion with no deemed-approval deadline (§1.4)",
-        "Withholding undisputed amounts, or no dispute process (§4.4)"
+        "Withholding undisputed amounts, or no dispute process (§4.4)",
+        "Refund or claw-back of amounts already paid at the client's discretion, or being required to keep working while payment is withheld (tool heuristic, not a Common Paper term)"
       ]
     }
   }

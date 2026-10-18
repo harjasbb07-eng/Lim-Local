@@ -140,6 +140,7 @@ These are small test sets and several rules were tuned while looking at them. Tr
 * **Scanned PDFs** are not supported, and PDFs with unusual layouts may split incorrectly.
 * **Small model.** `gemma4:e2b-it-qat` is a small model. Its redlines and negotiation lines need human review.
 * **Scope.** Only three clause types are checked. Non-compete, governing law, termination and similar clauses are not.
+- **Conflicting sections.** If a contract contains multiple sections on the same topic (such as a standard main body clause overridden by an addendum), only the highest-scoring section is audited. Contradictions between sections are not analyzed.
 
 ## Commercial direction
 
