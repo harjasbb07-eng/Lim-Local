@@ -20,7 +20,7 @@ A commercial contracts lawyer costs roughly $300 to $800 per hour, which is hard
 2. Splits it into sections and picks one section each for payment terms, IP ownership and indemnification and liability.
 3. Compares each section with verbatim sections of the Common Paper Professional Services Agreement (PSA) Standard Terms v1.1.
 4. Detects red flags with code-level rules, and uses the local Gemma 4 model to write a suggested redline and a polite negotiation line.
-5. Writes `audit_report.html`, a standalone document styled after Wikipedia, with a risk rating per clause, quoted evidence, a side-by-side comparison and copy buttons.
+5. Writes `audit_<contract name>.html` (for example `audit_sample_sow.html`), a standalone document styled after Wikipedia, with a risk rating per clause, quoted evidence, a side-by-side comparison and copy buttons.
 
 ## How ratings work
 
@@ -51,9 +51,9 @@ Scanned or image-only PDFs are rejected with a message asking you to export from
 
 * Node.js 18 or later.
 * [Ollama](https://ollama.com) with the `gemma4:e2b-it-qat` model.
-* A GPU with about 4 GB of VRAM is recommended. The model uses roughly 1.7 GB of VRAM once loaded.
+* A GPU with about 4 GB of VRAM is recommended. It was tested on a 6 GB and a 4 GB laptop GPU.
 
-Tested on Windows 11, Node.js, Ollama 0.40.5, an NVIDIA RTX 4050 Laptop GPU (6 GB VRAM) and 16 GB of system RAM. Other setups should work but have not been tested.
+Tested on Windows 11, Node.js, Ollama 0.40.5, an NVIDIA RTX 4050 Laptop GPU (6 GB VRAM) and 16 GB of system RAM. One outside tester also ran it on their own laptop with an NVIDIA RTX 2050 (4 GB VRAM). Other setups should work but have not been tested.
 
 ## Quick start
 
@@ -81,7 +81,7 @@ You can also call it directly:
 npx tsx audit.ts sample_sow.md
 ```
 
-4. Open `audit_report.html` in your browser.
+4. Open `audit_sample_sow.html` in your browser. The report is named after the contract, so auditing `my_contract.docx` writes `audit_my_contract.html`.
 
 The repository includes `vendor/PSA` and a generated `reference_clauses.json`, so you do not need to rebuild the reference data. To regenerate it from the bundled Common Paper source:
 
@@ -128,19 +128,21 @@ Set the `LIM_MODEL` environment variable to try a different Ollama model, for ex
 | `messy_sow.txt` | All three found and rated HIGH. |
 | `example.txt` | Payment found and rated MEDIUM (no deadline stated, retainage holdback). IP and indemnification reported as not found. |
 
-These are small test sets and several rules were tuned while looking at them. Treat the results as a demonstration, not a measured accuracy figure. No independent user testing has been done yet.
+These are small test sets and several rules were tuned while looking at them. Treat the results as a demonstration, not a measured accuracy figure.
+
+One outside tester ran it on their own laptop with their own test contract. That contract exposed three rule bugs, which are now fixed. On their last run, a full contract took 35.9 seconds on a 4 GB GPU. That is one person, so treat it as a first check and not a study.
 
 ## Known limitations
 
 * **English only.** Red-flag rules are keyword patterns written for English contracts.
 * **One section per clause type.** Terms spread across several sections, addenda or catch-all clauses may be missed.
+* **Conflicting sections.** If a contract contains multiple sections on the same topic (such as a standard main body clause overridden by an addendum), only the highest-scoring section is audited. Contradictions between sections are not analyzed.
 * **Master agreements.** A SOW that defers liability or IP to a separate master agreement will report those clauses as not found. Lim Local only reads the file you give it.
 * **Rule-based detection.** Unusual wording can slip past the patterns, and some phrasings can trigger a flag that does not fit. Always read the quoted evidence.
 * **Redlines are suggestions.** The model can add terms that are not in the original, such as a 30-day payment period. Compare every redline with the full contract.
 * **Scanned PDFs** are not supported, and PDFs with unusual layouts may split incorrectly.
 * **Small model.** `gemma4:e2b-it-qat` is a small model. Its redlines and negotiation lines need human review.
 * **Scope.** Only three clause types are checked. Non-compete, governing law, termination and similar clauses are not.
-- **Conflicting sections.** If a contract contains multiple sections on the same topic (such as a standard main body clause overridden by an addendum), only the highest-scoring section is audited. Contradictions between sections are not analyzed.
 
 ## Commercial direction
 
@@ -148,6 +150,8 @@ The command-line tool is open source under the MIT license. Possible paid direct
 
 * A packaged desktop app with an embedded local model runner, sold as a one-time license to freelancers and small agencies.
 * Paid clause packs for non-compete, jurisdiction and master services terms.
+
+My first outside tester said they would pay a one-time fee for a finished version that works well. No price was discussed, and nobody has paid yet.
 
 ## Hacktoberfest 2026
 
